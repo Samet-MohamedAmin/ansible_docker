@@ -28,7 +28,7 @@
         name: "{{ cockpit_items }}"
         enablerepo: copr-cockpit
         state: latest
-      notify: start cockpit service
+      notify: restart cockpit service
     -
       name: enable unecrypted connection
       lineinfile:
@@ -42,10 +42,10 @@
 
   handlers:
     -
-      name: start cockpit service
+      name: restart cockpit service
       service:
         name: "{{ item }}"
-        state: stopped
+        state: restarted
         enabled: true
       with_items:
         - cockpit
@@ -60,5 +60,5 @@
         permanent: true
         immediate: true
         state: enabled
-      when: "('firewalld.service' in ansible_facts.services ) or (ansible_facts.services['firewalld.service'].status != 'disabled')"
+      when: "('firewalld.service' in ansible_facts.services.keys() ) and (ansible_facts.services['firewalld.service'].status != 'disabled')"
       

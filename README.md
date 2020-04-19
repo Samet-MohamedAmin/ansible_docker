@@ -11,3 +11,5 @@ run vagrant
 ``` bash
 vagrant up 
 ```
+
+open cockpit in http://172.17.195.20:9090/
