@@ -1,0 +1,11 @@
+---
+-
+  hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    -
+      name: install podman
+      package:
+        name: podman
+        state: present
